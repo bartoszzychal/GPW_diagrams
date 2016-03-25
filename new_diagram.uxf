@@ -1,0 +1,1706 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.0">
+  <zoom_level>3</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>963</x>
+      <y>417</y>
+      <w>144</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BrokerService
+--
+addStockQuotations(List&lt;StockQuotationTo&gt;)
+prepareOffer(Long,List&lt;TransactionTo&gt;): List&lt;TransactionTo&gt;
+responseOffer(Long,Boolean)
+getAllClientStocks(Long): List&lt;StockTo&gt;
+getTodayStockQuotation(): List&lt;StockQuotationTo&gt;
+getStockQuotationFrom(Date): List&lt;StockQuotationTo&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>429</y>
+      <w>87</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BankBrookerAdapterService
+--
+getPayment(Long): Money
+payForTransaction(Long, Money): boolean
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>294</y>
+      <w>129</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+SimulationService
+--
+createClients()
+execute()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>372</x>
+      <y>342</y>
+      <w>48</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;
+DailySupervisorService
+--
+getCurrentDay: Date
+execute(Date)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>837</x>
+      <y>498</y>
+      <w>75</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+StockRepository
+--
+addStocksClient(List&lt;StockEntity&gt;)
+deleteStocksClient(List&lt;StockEntity&gt;)
+getStocks(Long): List&lt;StockEntity&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>696</x>
+      <y>294</y>
+      <w>93</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+DataProvider
+--
+- path: Path
+- file: File
+- fileReader: FileReader
+- bufferedReader: BufferedReader
+--
++ getStartDay()
++ setPath(Path)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>498</y>
+      <w>129</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+StockQuotationMapper
+--
+_+ map(StockQuotationTo):StockQuotationEntity_
+_+ map(StockQuotationEntity):StockQuotationTo_
+_+ map2Entity(List&lt;StockQuotationTo&gt;):List&lt;StockQuotationEntity&gt;_
+_+ map2To(List&lt;StockQuotationEntity&gt;):List&lt;StockQuotationTo&gt;_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>129</x>
+      <y>294</y>
+      <w>111</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BrokerStrategyAdapterService
+--
+prepareOffer(Long,List&lt;TransactionTo&gt;): List&lt;TransactionTo&gt;
+responseOffer(Long,Boolean)
+getAllClientStocks(Long): List&lt;StockTo&gt;
+getTodayStockQuotation(): List&lt;StockQuotationTo&gt;
+getStockQuotationFrom(Date): List&lt;StockQuotationTo&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>600</y>
+      <w>93</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BankStrategytAdapterService
+--
+getCurrencExchangeRate(String, String): Money
+exchange(Long, String, String)
+getAccount(Long): AccountTo
+payForTransaction(Long, Money): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>417</y>
+      <w>96</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BankService
+--
+generateNewCurrentRating(Date)
+addClient(Long): Boolean
+getCurrenctExchangeRate(String, String): Money
+exchange(Long, String, String)
+getAccount(Long): AccountTo
+payForTransaction(Long, Money): boolean
+getPayment(Long): Money
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>555</x>
+      <y>495</y>
+      <w>84</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+AccountRepository
+--
+getAccountEntity(Long): AccountEntity
+payForTransaction(Long, Money): boolean
+addAccountForClient(Long): Boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>324</y>
+      <w>93</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+BrokerDataProviderAdapterService
+--
+addStockQuotations(List&lt;StockQuotationTo&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>267</x>
+      <y>336</y>
+      <w>48</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;
+DailyCounter
+--
+- currentDay: Date
+--
+setStartDay(Date)
+nextDay()
+getCurrentDay: Date
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>711</x>
+      <y>348</y>
+      <w>72</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+DailyCounterBBAdapter
+--
+getCurrentDay: Date
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>351</x>
+      <y>423</y>
+      <w>87</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+ClientService
+--
+findAll(): List&lt;ClientTo&gt;
+addClient(ClientTo): ClientTo
+executeStrategy(ClientTo)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>375</x>
+      <y>576</y>
+      <w>42</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+ClientEntity
+--
+id:Long
+strategy: Integer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>354</x>
+      <y>492</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+ClientRepository
+--
+findAll(): List&lt;ClientEntity&gt;
+addClient(ClientEntity): ClientEntity</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>276</x>
+      <y>576</y>
+      <w>42</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;To&gt;&gt;
+ClientTo
+--
+id:Long
+idStrategy: Integer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>468</y>
+      <w>87</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+StrategyFactory
+--
+getStrategy(Integer, Long): Strategy
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>165</x>
+      <y>357</y>
+      <w>33</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Strategy
+--
+execute()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>411</y>
+      <w>63</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+SmallBrainStrategy
+--
+_ID: Integer: 1_
+idClient: Long
+--
+SmallBrainStrategy(Long)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>153</x>
+      <y>411</y>
+      <w>63</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+MediumBrainStrategy
+--
+_ID: Integer: 2_
+idClient: Long
+--
+MediumBrainStrategy(Long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>84</x>
+      <y>411</y>
+      <w>63</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+FullBrainStrategy
+--
+_ID: Integer: 3_
+idClient: Long
+--
+FullBrainStrategy(Long)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>615</y>
+      <w>51</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+CompanyEntity
+-
+id: Long
+name: String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>417</x>
+      <y>351</y>
+      <w>300</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;980.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>309</y>
+      <w>240</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;780.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>315</y>
+      <w>9</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>786</x>
+      <y>309</y>
+      <w>60</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>180.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>873</x>
+      <y>456</y>
+      <w>165</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;140.0;530.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>183</x>
+      <y>438</y>
+      <w>81</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;100.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>183</x>
+      <y>438</y>
+      <w>24</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>438</y>
+      <w>87</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>270.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>450</y>
+      <w>9</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>462</y>
+      <w>36</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>100.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>441</y>
+      <w>294</w>
+      <h>183</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>960.0;10.0;720.0;10.0;720.0;590.0;10.0;590.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>615</x>
+      <y>438</y>
+      <w>126</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>400.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>771</x>
+      <y>600</y>
+      <w>93</w>
+      <h>87</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Money
+--
+_+ SCALA: Integer = 2_
+_+ ROUNDING_MODE: RoundingMode = DOWN_
+- value: BigDecimal
+--
++ Money(String, String)
++ Money(Integer, String)
++ add(Money): Money
++ substract(Money): Money
++ divide(Money): Money
++ divide(Integer): Money
++ multiply(Money): Money
++ multiply(Money): Money
++ max(Money): Money
++ min(Money): Money
+_+ max(Money, Money): Money_
+_+ min(Money, Money): Money_
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>714</x>
+      <y>612</y>
+      <w>51</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+CompanyTo
+-
+id: Long
+name: String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>819</x>
+      <y>438</y>
+      <w>150</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;480.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>363</y>
+      <w>9</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>357</y>
+      <w>213</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;690.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>177</x>
+      <y>252</y>
+      <w>873</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0;2890.0;10.0;2890.0;550.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>177</x>
+      <y>330</y>
+      <w>9</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>561</x>
+      <y>561</y>
+      <w>87</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;AccountEntity&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>525</y>
+      <w>9</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1158</x>
+      <y>540</y>
+      <w>78</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;StockQuotationEntity&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>537</y>
+      <w>66</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;StockEntity&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>348</x>
+      <y>540</y>
+      <w>87</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;ClientEntity&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>513</y>
+      <w>9</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>351</y>
+      <w>66</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>546</y>
+      <w>9</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>492</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+ClientMapper
+--
+map(ClientTo): ClientEntity
+map(ClientEntity): ClientTo
+map2Entity(List&lt;ClientTo&gt;): List&lt;ClientEntity&gt;
+map2To(List&lt;ClientEntity&gt;): List&lt;ClientTo&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>525</y>
+      <w>24</w>
+      <h>57</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>297</x>
+      <y>438</y>
+      <w>60</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>651</x>
+      <y>501</y>
+      <w>69</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+AccountMapper
+--
+map(AccountTo): AccountEntity
+map(AccountEntity): AccountTo</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>738</x>
+      <y>498</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+StockMapper
+--
+map(StockTo): StockEntity
+map(StockEntity): StockTo
+map2Entity(List&lt;StockTo&gt;): List&lt;StockEntity&gt;
+map2To(List&lt;StockEntity&gt;): List&lt;StockTo&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>783</x>
+      <y>456</y>
+      <w>249</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>810.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1167</x>
+      <y>564</y>
+      <w>51</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+StockQuotationEntity
+-
+id: Long
+company: CompanyEntity
+date: Date
+quotation: Money
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>570</y>
+      <w>51</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;To&gt;&gt;
+StockQuotationTo
+-
+id: Long
+company: CompanyTo
+date: Date
+quotation: Money
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1191</x>
+      <y>546</y>
+      <w>9</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>849</x>
+      <y>558</y>
+      <w>51</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+StockEntity
+-
+id: Long
+idClient: Long
+number: Integer
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>543</y>
+      <w>9</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>615</x>
+      <y>462</y>
+      <w>69</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>579</y>
+      <w>72</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+AccountEntity
+--
+id: Long
+idClient: Long
+payment: List&lt;Money&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>567</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>654</x>
+      <y>582</y>
+      <w>63</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;To&gt;&gt;
+AccountTo
+--
+id: Long
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>678</x>
+      <y>525</y>
+      <w>24</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>555</y>
+      <w>51</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;To&gt;&gt;
+StockTo
+-
+id: Long
+idClient: Long
+number: Integer
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>531</y>
+      <w>33</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>885</x>
+      <y>585</y>
+      <w>27</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;
+m1=1
+r2= company
+m2=*</panel_attributes>
+    <additional_attributes>40.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>366</y>
+      <w>111</w>
+      <h>258</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>350.0;10.0;10.0;10.0;10.0;840.0;280.0;840.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>372</y>
+      <w>84</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>372</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>372</y>
+      <w>9</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>561</y>
+      <w>87</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;CurrencyExchangeEntity&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>579</y>
+      <w>87</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+CurrencyExchangeEntity
+-
+currentName: String
+price: Money
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>522</y>
+      <w>9</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>567</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>786</x>
+      <y>531</y>
+      <w>90</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>639</x>
+      <y>525</y>
+      <w>45</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>657</x>
+      <y>639</y>
+      <w>45</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+CurrencyTo
+-
+currentName: String
+budget: Money
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>678</x>
+      <y>600</y>
+      <w>21</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+r2= budget
+m1=*</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>303</x>
+      <y>525</y>
+      <w>78</w>
+      <h>57</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1011</x>
+      <y>624</y>
+      <w>42</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+TransactionEnum
+--
+SELL
+BUY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>546</y>
+      <w>87</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>JpaRepository&lt;TransactionEntity&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>963</x>
+      <y>552</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>942</x>
+      <y>564</y>
+      <w>60</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+TransactionEntity
+-
+id: Long
+idClient: Long
+stock: StockEntity
+transaction: TransactionEnum
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>966</x>
+      <y>591</y>
+      <w>72</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r2= transacton</panel_attributes>
+    <additional_attributes>220.0;110.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1068</x>
+      <y>567</y>
+      <w>60</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+TransactionTo
+-
+id: Long
+idClient: Long
+stock: StockEntity
+transaction: TransactionEnum
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1017</x>
+      <y>495</y>
+      <w>114</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+TransactionMapper
+--
+map(TransactionTo): TransactionEntity
+map(TransactionEntity): TransactionTo
+map2Entity(List&lt;TransactionTo&gt;): List&lt;&gt; TransactionEntity
+map2To(List&lt;TransactionEntity&gt;): List&lt;TransactionTo&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>456</y>
+      <w>27</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1092</x>
+      <y>525</y>
+      <w>27</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>999</x>
+      <y>525</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>280.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1032</x>
+      <y>597</y>
+      <w>69</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r2= transacton
+</panel_attributes>
+    <additional_attributes>10.0;90.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>465</x>
+      <y>495</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+CurrencyRepository
+--
+exchange(Long, String, String)
+getCurrencyRate(String): Money
+setCurrencyRate(String, Money)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>462</y>
+      <w>45</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;110.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>495</y>
+      <w>111</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+StockQuotationRepository
+--
+addStockQuotations(List&lt;StockQuotationEntity&gt;)
+getTodayStockQuotation(): List&lt;StockQuotationEntity&gt;
+getStockQuotationFrom(Date): List&lt;StockQuotationEntity&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>528</y>
+      <w>9</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>498</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+TransactionRepository
+--
+addTransactions(List&lt;TransactionEntity&gt;)
+deleteClientTransaction(Long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1053</x>
+      <y>456</y>
+      <w>147</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>470.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>456</y>
+      <w>84</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;140.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1191</x>
+      <y>522</y>
+      <w>9</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>963</x>
+      <y>525</y>
+      <w>9</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1098</x>
+      <y>354</y>
+      <w>123</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+BrokersOfficeProperties
+-
+_+ MIN_BROKERAGE: Money = 5_
+_+ PERCENT_BROKERAGE: integer = 5_
+_+ MIN_PERCENT_OF_STOCK: integer = 80_
+_+ MAX_PERCENT_OF_STOCK: integer = 100_
+_+ MIN_PERCENT_OF_ONE_BUY_STOCK: integer = 98_
+_+ MAX_PERCENT_OF_ONE_BUY_STOCK: integer = 100_
+_+ MIN_PERCENT_OF_ONE_SELL_STOCK: integer = 100_
+_+ MAX_PERCENT_OF_ONE_SELL_STOCK: integer = 102_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>399</y>
+      <w>60</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>819</x>
+      <y>582</y>
+      <w>36</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=1
+r2= price
+m2=*</panel_attributes>
+    <additional_attributes>10.0;60.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>579</y>
+      <w>42</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=1
+r2= price
+m2=*</panel_attributes>
+    <additional_attributes>120.0;70.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>738</x>
+      <y>582</y>
+      <w>39</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;
+m1=1
+r2= company
+m2=*</panel_attributes>
+    <additional_attributes>10.0;100.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>579</x>
+      <y>639</y>
+      <w>45</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+CurrencyTo
+-
+currentName: String
+budget: Money
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>606</y>
+      <w>21</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+r2= budget
+m1=*</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>435</y>
+      <w>129</w>
+      <h>51</h>
+    </coordinates>
+    <panel_attributes>lt=.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;150.0;410.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>195</x>
+      <y>363</y>
+      <w>162</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=.
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;520.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1059</x>
+      <y>456</y>
+      <w>270</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;880.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1215</x>
+      <y>534</y>
+      <w>102</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>534</y>
+      <w>24</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>930</x>
+      <y>342</y>
+      <w>108</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>340.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>393</x>
+      <y>363</y>
+      <w>186</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>600.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>834</x>
+      <y>288</y>
+      <w>129</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+StockQuotationParser
+--
+_+ map(String): StockQuotationTo_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>891</x>
+      <y>306</y>
+      <w>18</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;use&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

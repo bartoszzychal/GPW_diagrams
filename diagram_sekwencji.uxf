@@ -1,50 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.1.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>4</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>0</x>
-      <y>168</y>
-      <w>2370</w>
-      <h>552</h>
+      <y>0</y>
+      <w>2576</w>
+      <h>1124</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
 obj=DailySupervisorService~DSS
 obj=DailyCounter~ DC
+obj=DailyCounterBrokerAdapter~DCBA
 obj=ClientService~CS
+obj=StrategyFactory~SF
+obj=Strategy~S
+obj=BankStrategytAdapterService~BaSAS
 obj=BankService~BaS
 obj=DataProvider~DP
 obj= BrokerDataProviderAdapterService ~BDPAS
+obj=BrokerStrategyAdapterService~BSAS
 obj= BrokerService~BS
 obj= StockQuotationRepository ~SQR
+obj=StockRepository~SR
 obj= ClientRepository~CR
 obj=AccountRepository~AR
+obj=CurrencyRepository~CuR
 
 SS-&gt;DP : setPath(); on=SS; on=DP;
 SS-&gt;DP : execute(); 
 DP-&gt;BDPAS: addStockQuotations(List&lt;StockQuotationTo&gt;);BDPAS-&gt; BS: addStockQuotations(List&lt;StockQuotationTo&gt;);BS-&gt;SQR: addStockQuotations(List&lt;StockQuotationEntity&gt;);
 SS-&gt;DP : getStartDay();
-DP.&gt;SS ; off=DP;
+DP.&gt;SS: Date ; off=DP;
 
 SS-&gt;CS: addClient(ClientTo);CS-&gt;CR: addClient(ClientEntity)
-SS-&gt;DSS: execute(Date); on=DSS; off=SS
-DSS-&gt; DC: setStartDay(Date); on=DC
 
-DSS-&gt;CS: findAll();CS-&gt;CR: findAll();
-CR.&gt;CS;CS.&gt;DSS;
+SS-&gt;DSS: execute(Date); on=DSS; off=SS
+
+DSS-&gt; DC: setStartDay(Date); on=DC
+off=DC;
+
+DSS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
+CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;DSS:List&lt;ClientTo&gt;;off=CS; off=CR
+
 combinedFragment=loop~loop1 DSS BaS; 
 DSS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
 --
 
 combinedFragment=MajorLoop~ml;
-DSS-&gt;BaS: generateNewCurrentRating(Date)
-DSS-&gt;CS: findAll();CS-&gt;CR: findAll();
-CR.&gt;CS;CS.&gt;DSS;
+DSS-&gt;BaS: generateNewCurrentRating(Date); BaS-&gt;CuR: setCurrencyRate(String, Money);
+DSS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
+CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;DSS:List&lt;ClientTo&gt;;off=CS; off=CR
 combinedFragment=ClientLoop~cl DSS CS;
-DSS-&gt;CS: executeStrategy(ClientTo)
+DSS-&gt;CS: executeStrategy(ClientTo); on=CS
+CS-&gt;SF:getStrategy(Integer, Long); on=SF
+SF.&gt;CS; off=SF
+CS-&gt;S:execute(); on=S;
 
+S-&gt;BaSAS: getAccount(Long); on=BaSAS
+BaSAS-&gt;BaS: getAccount(Long); on=BaS
+BaS-&gt;AR: getAccount(Long); on=AR
+AR.&gt;BaS: AccountEntity; off=AR
+BaS.&gt;BaSAS: AccountTo; 
+BaSAS.&gt;S: AccountTo; 
+
+S-&gt;BaSAS: getCurrencExchangeRate(String, String); 
+BaSAS-&gt;BaS: getCurrencExchangeRate(String, String); 
+BaS-&gt;CuR: getCurrencyRate(String):; on=CuR
+CuR.&gt;BaS: Money;
+BaS-&gt;CuR: getCurrencyRate(String); 
+CuR.&gt;BaS: Money; off=CuR;
+BaS.&gt;BaSAS: Money; 
+BaSAS.&gt;S: Money; 
+
+S-&gt;BSAS: getAllClientStocks(Long); on=BSAS
+BSAS-&gt;BS: getAllClientStocks(Long); on=BS
+BS-&gt;SR: getStocks(Long); on=SR
+SR.&gt;BS: List&lt;StockEntity&gt;; off=SR
+BS.&gt;BSAS: List&lt;StockTo&gt;; 
+BSAS.&gt;S:  List&lt;StockTo&gt;; 
+
+S-&gt;BSAS: getTodayStockQuotation();
+BSAS-&gt;BS: getTodayStockQuotation();
+BS-&gt;DCBA: getCurrentDate(); on=DCBA;
+DCBA-&gt;DC: getCurrentDate(); on=DC
+DC.&gt;DCBA: Date; off=DC
+DCBA.&gt;BS: Date; off=DCBA
+BS-&gt;SQR: getTodayStockQuotation(Date); on=SQR
+SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
+BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
+BSAS.&gt;S:  List&lt;StockQuotationTo&gt;; 
+
+S-&gt;BSAS: getStockQuotationFrom(Date);
+BSAS-&gt;BS: getStockQuotationFrom(Date);
+BS-&gt;DCBA: getCurrentDate(); on=DCBA;
+DCBA-&gt;DC: getCurrentDate(); on=DC
+DC.&gt;DCBA: Date; off=DC
+DCBA.&gt;BS: Date; off=DCBA
+BS-&gt;SQR: getStockQuotationFrom(Date); on=SQR
+SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
+BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
+BSAS.&gt;S:  List&lt;StockQuotationTo&gt;; 
+
+S-&gt;BSAS: chargeFees(List&lt;TransactionTo&gt;);
+BSAS-&gt;BS: chargeFees(List&lt;TransactionTo&gt;);
+BS-&gt;SQR: getStockQuotationFrom(Date); on=SQR
+SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
+BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
+BSAS.&gt;S:  List&lt;StockQuotationTo&gt;;
 --
 --
 

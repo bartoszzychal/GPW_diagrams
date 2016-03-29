@@ -194,7 +194,7 @@ getPayment(Long): Money
     <panel_attributes>&lt;&lt;Repository&gt;&gt;
 AccountRepository
 --
-getAccountEntity(Long): AccountEntity
+getAccount(Long): AccountEntity
 payForTransaction(Long, Money): boolean
 addAccountForClient(Long): Boolean
 </panel_attributes>
@@ -243,7 +243,7 @@ getCurrentDay: Date
       <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
-DailyCounterBBAdapter
+DailyCounterBrokerAdapter
 --
 getCurrentDay: Date
 
@@ -1413,7 +1413,7 @@ setCurrencyRate(String, Money)</panel_attributes>
 StockQuotationRepository
 --
 addStockQuotations(List&lt;StockQuotationEntity&gt;)
-getTodayStockQuotation(): List&lt;StockQuotationEntity&gt;
+getTodayStockQuotation(Date): List&lt;StockQuotationEntity&gt;
 getStockQuotationFrom(Date): List&lt;StockQuotationEntity&gt;</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1489,39 +1489,6 @@ deleteClientTransaction(Long)</panel_attributes>
     <panel_attributes>lt=&lt;&lt;-
 </panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2768</x>
-      <y>272</y>
-      <w>328</w>
-      <h>144</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Class&gt;&gt;
-BrokersOfficeProperties
--
-_+ MIN_BROKERAGE: Money = 5_
-_+ PERCENT_BROKERAGE: integer = 5_
-_+ MIN_PERCENT_OF_STOCK: integer = 80_
-_+ MAX_PERCENT_OF_STOCK: integer = 100_
-_+ MIN_PERCENT_OF_ONE_BUY_STOCK: integer = 98_
-_+ MAX_PERCENT_OF_ONE_BUY_STOCK: integer = 100_
-_+ MIN_PERCENT_OF_ONE_SELL_STOCK: integer = 100_
-_+ MAX_PERCENT_OF_ONE_SELL_STOCK: integer = 102_
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2624</x>
-      <y>392</y>
-      <w>160</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>180.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

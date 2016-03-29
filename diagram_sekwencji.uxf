@@ -1,1 +1,54 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><umlet_diagram></umlet_diagram>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>0</x>
+      <y>168</y>
+      <w>2370</w>
+      <h>552</h>
+    </coordinates>
+    <panel_attributes>title= GPW
+obj=SimulationService~SS
+obj=DailySupervisorService~DSS
+obj=DailyCounter~ DC
+obj=ClientService~CS
+obj=BankService~BaS
+obj=DataProvider~DP
+obj= BrokerDataProviderAdapterService ~BDPAS
+obj= BrokerService~BS
+obj= StockQuotationRepository ~SQR
+obj= ClientRepository~CR
+obj=AccountRepository~AR
+
+SS-&gt;DP : setPath(); on=SS; on=DP;
+SS-&gt;DP : execute(); 
+DP-&gt;BDPAS: addStockQuotations(List&lt;StockQuotationTo&gt;);BDPAS-&gt; BS: addStockQuotations(List&lt;StockQuotationTo&gt;);BS-&gt;SQR: addStockQuotations(List&lt;StockQuotationEntity&gt;);
+SS-&gt;DP : getStartDay();
+DP.&gt;SS ; off=DP;
+
+SS-&gt;CS: addClient(ClientTo);CS-&gt;CR: addClient(ClientEntity)
+SS-&gt;DSS: execute(Date); on=DSS; off=SS
+DSS-&gt; DC: setStartDay(Date); on=DC
+
+DSS-&gt;CS: findAll();CS-&gt;CR: findAll();
+CR.&gt;CS;CS.&gt;DSS;
+combinedFragment=loop~loop1 DSS BaS; 
+DSS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
+--
+
+combinedFragment=MajorLoop~ml;
+DSS-&gt;BaS: generateNewCurrentRating(Date)
+DSS-&gt;CS: findAll();CS-&gt;CR: findAll();
+CR.&gt;CS;CS.&gt;DSS;
+combinedFragment=ClientLoop~cl DSS CS;
+DSS-&gt;CS: executeStrategy(ClientTo)
+
+--
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

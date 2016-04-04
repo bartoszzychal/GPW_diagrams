@@ -7,7 +7,7 @@
       <x>0</x>
       <y>0</y>
       <w>2490</w>
-      <h>2510</h>
+      <h>2720</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
@@ -28,8 +28,6 @@ obj=CurrencyRepository~CuR
 obj=DailySupervisorService~DSS
 obj=DailyCounter~ DC
 on=SS;
-
-
 SS-&gt;DSS: setStartDay(); on=DSS;
 DSS-&gt; DC: setStartDay(Date); on=DC
 off=DC;off=DSS;
@@ -43,10 +41,17 @@ SS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
 
 combinedFragment=execute()~ml;
 
+SS-&gt;BaS: generateNewCurrentRating(); on=BaS;
+BaS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BaS: Date; off=DC; off=DSS;
+combinedFragment=BankGenLoop~BGL BaS CuR;
+BaS-&gt;CuR: setCurrencyRate(Date,String, Money); off=BaS;
+--
+
 SS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
 CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;SS:List&lt;ClientTo&gt;;off=CS; off=CR
 
-combinedFragment=ClientLoop~cl SS DSS;
+combinedFragment=ClientsLoop~cl SS DC;
 
 SS-&gt;CS: executeStrategy(ClientTo); on=CS
 CS-&gt;SF:getStrategy(Integer, Long); on=SF
@@ -60,14 +65,16 @@ AR.&gt;BaS: AccountEntity; off=AR
 BaS.&gt;BaSAS: AccountTo; 
 BaSAS.&gt;S: AccountTo; 
 
-S-&gt;BaSAS: getCurrencExchangeRate(String, String); 
-BaSAS-&gt;BaS: getCurrencExchangeRate(String, String); 
-BaS-&gt;CuR: getCurrencyRate(String):; on=CuR
+S-&gt;BaSAS: getCurrencExchangeRate(String, String);
+BaSAS-&gt;BaS: getCurrencExchangeRate(String, String);
+BaS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BaS: Date; off=DC; off=DSS;
+BaS-&gt;CuR: getCurrencyRate(Date, String):; on=CuR
 CuR.&gt;BaS: Money;
-BaS-&gt;CuR: getCurrencyRate(String); 
+BaS-&gt;CuR: getCurrencyRate(Date, String); 
 CuR.&gt;BaS: Money; off=CuR;
-BaS.&gt;BaSAS: Money; 
-BaSAS.&gt;S: Money; 
+BaS.&gt;BaSAS: Money; off=BaS;
+BaSAS.&gt;S: Money; off= BaSAS;
 
 S-&gt;BSAS: getAllClientStocks(Long); on=BSAS
 BSAS-&gt;BS: getAllClientStocks(Long); on=BS
@@ -78,8 +85,8 @@ BSAS.&gt;S:  List&lt;StockTo&gt;;
 
 S-&gt;BSAS: getTodayStockQuotation();
 BSAS-&gt;BS: getTodayStockQuotation();
-BS-&gt;DC: getCurrentDate();  on=DC
-DC.&gt;BS: Date; off=DC
+BS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BS: Date; off=DC; off=DSS;
 BS-&gt;SQR: getTodayStockQuotation(Date); on=SQR
 SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
 BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
@@ -87,8 +94,8 @@ BSAS.&gt;S:  List&lt;StockQuotationTo&gt;;
 
 S-&gt;BSAS: getStockQuotationFrom(Date);
 BSAS-&gt;BS: getStockQuotationFrom(Date);
-BS-&gt;DC: getCurrentDate();  on=DC
-DC.&gt;BS: Date; off=DC
+BS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BS: Date; off=DC; off=DSS;
 BS-&gt;SQR: getStockQuotationFrom(Date); on=SQR
 SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
 BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
@@ -106,11 +113,13 @@ BS.&gt;BSAS: List&lt;TransactionTo&gt;; off=BS;
 BSAS.&gt;S:  List&lt;TransactionTo&gt;;off=BSAS; 
 
 
-S-&gt;BaSAS: exchange(Long, String, String, Money); 
-BaSAS-&gt;BaS: exchange(Long, String, String, Money); 
-BaS-&gt;CuR: getCurrencyRate(String):; on=CuR
+S-&gt;BaSAS: exchange(Long, String, String, Money); on=BaSAS;
+BaSAS-&gt;BaS: exchange(Long, String, String, Money); on= BaS;
+BaS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BaS: Date; off=DC; off=DSS; 
+BaS-&gt;CuR: getCurrencyRate(Date,String):; on=CuR
 CuR.&gt;BaS: Money;
-BaS-&gt;CuR: getCurrencyRate(String); 
+BaS-&gt;CuR: getCurrencyRate(Date,String); 
 CuR.&gt;BaS: Money; off=CuR;
 BaS-&gt;AR: getAccount(Long); on=AR
 AR.&gt;BaS: AccountEntity; 
@@ -133,8 +142,8 @@ BaSAS.&gt;S: Boolean;
 on=BSAS; S-&gt;BSAS: responseOffer(Long,Boolean);  on= BS
 BSAS-&gt;BS: responseOffer(Long,Boolean); off=BSAS; 
 on=BBAS;BS-&gt;BBAS: getTodayPayment(Long);BBAS-&gt;BaS: getPayment(Long);
-BaS-&gt;DC: getCurrentDate();  on=DC
-DC.&gt;BaS: Date; off=DC
+BaS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BaS: Date; off=DC; off=DSS;
 BaS.&gt;BBAS: PaymentTo; BBAS.&gt;BS:PaymentTo;
 BS-&gt;TR: updateTransactionsStatus(List&lt;TransactionEntity&gt;)
 BS-&gt;SR: addStocksClient(List&lt;StockEntity&gt;);
@@ -155,19 +164,20 @@ BaSAS.&gt;S: AccountTo;
 
 S-&gt;BaSAS: exchange(Long, String, String, Money); 
 BaSAS-&gt;BaS: exchange(Long, String, String, Money); 
-BaS-&gt;CuR: getCurrencyRate(String):; on=CuR
+BaS-&gt;DSS: getCurrentDate(); DSS-&gt;DC:getCurrentDate (); on=DSS; on=DC
+DC.&gt;DSS: Date; DSS.&gt;BaS: Date; off=DC; off=DSS;
+BaS-&gt;CuR: getCurrencyRate(Date,String):; on=CuR
 CuR.&gt;BaS: Money;
-BaS-&gt;CuR: getCurrencyRate(String); 
+BaS-&gt;CuR: getCurrencyRate(Date, String); 
 CuR.&gt;BaS: Money; off=CuR;
 BaS-&gt;AR: getAccount(Long); on=AR
 AR.&gt;BaS: AccountEntity; 
 BaS-&gt;AR: updateBudget(List&lt;CurrencyEntity&gt;); 
 BaS-&gt;AR: getAccount(Long); 
 AR.&gt;BaS: AccountEntity; off=AR;
-BaS.&gt;BaSAS: AccountTo; 
-BaSAS.&gt;S: AccountTo; 
-S.&gt;CS
-off=BaS; off= BaSAS; off=S;
+BaS.&gt;BaSAS: AccountTo; off=BaS; 
+BaSAS.&gt;S: AccountTo; off= BaSAS;
+S.&gt;CS;off=S;
 --
 CS.&gt;SS; off=CS;
 SS-&gt;DC: nextDay();

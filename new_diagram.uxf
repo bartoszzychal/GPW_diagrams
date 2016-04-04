@@ -1037,7 +1037,7 @@ m2=*</panel_attributes>
       <x>816</x>
       <y>654</y>
       <w>174</w>
-      <h>48</h>
+      <h>66</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 CurrencyExchangeEntity
@@ -1045,6 +1045,7 @@ CurrencyExchangeEntity
 id: Long
 currentName: String
 price: Money
+date: Date
 
 
 
@@ -1312,8 +1313,8 @@ r2= transactonType
     <panel_attributes>&lt;&lt;Repository&gt;&gt;
 CurrencyRepository
 --
-getCurrencyRate(String): Money
-setCurrencyRate(String, Money)</panel_attributes>
+getCurrencyRate(Date,String): Money
+setCurrencyRate(Date,String, Money)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

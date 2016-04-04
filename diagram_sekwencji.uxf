@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.1.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>180</x>
+      <x>0</x>
       <y>0</y>
-      <w>4740</w>
-      <h>5110</h>
+      <w>2490</w>
+      <h>2510</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
-obj=DailySupervisorService~DSS
-obj=DailyCounter~ DC
 obj=ClientService~CS
 obj=StrategyFactory~SF
 obj=Strategy~S
@@ -27,30 +25,30 @@ obj=TransactionRepository~ TR
 obj= ClientRepository~CR
 obj=AccountRepository~AR
 obj=CurrencyRepository~CuR
-
+obj=DailySupervisorService~DSS
+obj=DailyCounter~ DC
 on=SS;
 
-SS-&gt;CS: addClient(ClientTo); on=CS; 
-CS-&gt;CR: addClient(ClientEntity) ; off=CS;
 
-SS-&gt;DSS: execute(Date); on=DSS;
-
+SS-&gt;DSS: setStartDay(); on=DSS;
 DSS-&gt; DC: setStartDay(Date); on=DC
-off=DC;
+off=DC;off=DSS;
 
-DSS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
-CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;DSS:List&lt;ClientTo&gt;;off=CS; off=CR
+SS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
+CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;SS:List&lt;ClientTo&gt;;off=CS; off=CR
 
-combinedFragment=loop~loop1 DSS BaS; 
-DSS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
+combinedFragment=createAccountsInBank~loop1 SS AR; 
+SS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
 --
 
-combinedFragment=MajorLoop~ml;
-DSS-&gt;BaS: generateNewCurrentRating(Date); BaS-&gt;CuR: setCurrencyRate(String, Money);
-DSS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
-CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;DSS:List&lt;ClientTo&gt;;off=CS; off=CR
-combinedFragment=ClientLoop~cl DSS CS;
-DSS-&gt;CS: executeStrategy(ClientTo); on=CS
+combinedFragment=execute()~ml;
+
+SS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
+CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;SS:List&lt;ClientTo&gt;;off=CS; off=CR
+
+combinedFragment=ClientLoop~cl SS DSS;
+
+SS-&gt;CS: executeStrategy(ClientTo); on=CS
 CS-&gt;SF:getStrategy(Integer, Long); on=SF
 SF.&gt;CS; off=SF
 CS-&gt;S:execute(); on=S;
@@ -104,8 +102,9 @@ BSAS.&gt;S:  Money;
 S-&gt;BSAS: prepareOffer(List&lt;TransactionTo&gt;);
 BSAS-&gt;BS: prepareOffer(List&lt;TransactionTo&gt;);
 BS-&gt;TR: addTransactions(List&lt;TransactionEntity&gt;);
-BS.&gt;BSAS: List&lt;TransactionTo&gt;; 
-BSAS.&gt;S:  List&lt;TransactionTo&gt;;
+BS.&gt;BSAS: List&lt;TransactionTo&gt;; off=BS;
+BSAS.&gt;S:  List&lt;TransactionTo&gt;;off=BSAS; 
+
 
 S-&gt;BaSAS: exchange(Long, String, String, Money); 
 BaSAS-&gt;BaS: exchange(Long, String, String, Money); 
@@ -131,24 +130,21 @@ AR.&gt;BaS: Boolean; off=AR;
 BaS.&gt;BaSAS: Boolean; 
 BaSAS.&gt;S: Boolean; 
 
-S-&gt;BSAS: responseOffer(Long,Boolean);
-BSAS-&gt;BS: responseOffer(Long,Boolean);
-BS-&gt;BBAS: getTodayPayment(Long);
-BBAS-&gt;BaS: getPayment(Long);
+on=BSAS; S-&gt;BSAS: responseOffer(Long,Boolean);  on= BS
+BSAS-&gt;BS: responseOffer(Long,Boolean); off=BSAS; 
+on=BBAS;BS-&gt;BBAS: getTodayPayment(Long);BBAS-&gt;BaS: getPayment(Long);
 BaS-&gt;DC: getCurrentDate();  on=DC
 DC.&gt;BaS: Date; off=DC
-BaS.&gt;BBAS: PaymentTo;
-BBAS.&gt;BS:PaymentTo;
+BaS.&gt;BBAS: PaymentTo; BBAS.&gt;BS:PaymentTo;
 BS-&gt;TR: updateTransactionsStatus(List&lt;TransactionEntity&gt;)
 BS-&gt;SR: addStocksClient(List&lt;StockEntity&gt;);
 BS-&gt;SR: deleteStocksClient(List&lt;StockEntity&gt;);
-BS-&gt; BBAS: payForTransaction(Long, PaymentTo);
-BBAS-&gt;BaS: payForTransaction(Long, PaymentTo);
+BS-&gt; BBAS: payForTransaction(Long, PaymentTo);BBAS-&gt;BaS: payForTransaction(Long, PaymentTo);
 BaS-&gt;AR: addPayment(Long, PaymentEntity);  on=AR;
 BaS-&gt;AR: updateBudget(Long, List&lt;CurrencyEntity&gt;); 
 AR.&gt;BaS: Boolean; off=AR;
-BaS.&gt;BBAS: Boolean; BBAS.&gt; BS: Boolean
-BS.&gt;S
+BaS.&gt;BBAS: Boolean; BBAS.&gt; BS: Boolean; off=BBAS
+BS.&gt;S; off=BS;
 
 S-&gt;BaSAS: getAccount(Long); 
 BaSAS-&gt;BaS: getAccount(Long); 
@@ -170,7 +166,11 @@ BaS-&gt;AR: getAccount(Long);
 AR.&gt;BaS: AccountEntity; off=AR;
 BaS.&gt;BaSAS: AccountTo; 
 BaSAS.&gt;S: AccountTo; 
+S.&gt;CS
+off=BaS; off= BaSAS; off=S;
 --
+CS.&gt;SS; off=CS;
+SS-&gt;DC: nextDay();
 --
 
 </panel_attributes>

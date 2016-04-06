@@ -7,7 +7,7 @@
       <x>0</x>
       <y>0</y>
       <w>2490</w>
-      <h>2665</h>
+      <h>2575</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
@@ -29,11 +29,8 @@ obj=DailySupervisorService~DSS
 obj=DailyCounter~ DC
 on=SS;
 
-SS-&gt;SQR: findStartDay(); on=SQR;
-SQR.&gt;SS: Date; off=SQR
-SS-&gt;DSS: setStartDay(); on=DSS;
-DSS-&gt; DC: setStartDay(Date); on=DC
-off=DC;off=DSS;
+
+
 
 combinedFragment=execute()~ml;
 

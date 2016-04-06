@@ -7,7 +7,7 @@
       <x>0</x>
       <y>0</y>
       <w>2490</w>
-      <h>2720</h>
+      <h>2665</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
@@ -28,16 +28,12 @@ obj=CurrencyRepository~CuR
 obj=DailySupervisorService~DSS
 obj=DailyCounter~ DC
 on=SS;
+
+SS-&gt;SQR: findStartDay(); on=SQR;
+SQR.&gt;SS: Date; off=SQR
 SS-&gt;DSS: setStartDay(); on=DSS;
 DSS-&gt; DC: setStartDay(Date); on=DC
 off=DC;off=DSS;
-
-SS-&gt;CS: findAll();CS-&gt;CR: findAll(); on=CS; on=CR
-CR.&gt;CS: List&lt;ClientEntity&gt;;CS.&gt;SS:List&lt;ClientTo&gt;;off=CS; off=CR
-
-combinedFragment=createAccountsInBank~loop1 SS AR; 
-SS-&gt; BaS: addClient(Long);BaS-&gt;AR: addAccountForClient(Long)
---
 
 combinedFragment=execute()~ml;
 

@@ -6,8 +6,8 @@
     <coordinates>
       <x>0</x>
       <y>0</y>
-      <w>2490</w>
-      <h>2575</h>
+      <w>3795</w>
+      <h>2545</h>
     </coordinates>
     <panel_attributes>title= GPW
 obj=SimulationService~SS
@@ -94,7 +94,11 @@ SQR.&gt;BS: List&lt;StockQuotationEntity&gt;; off=SQR
 BS.&gt;BSAS: List&lt;StockQuotationTo&gt;; 
 BSAS.&gt;S:  List&lt;StockQuotationTo&gt;; 
 
-S-&gt;BSAS: calculateFees(List&lt;TransactionTo&gt;);
+
+S-&gt;S++: generateProposeOffer();
+tick=2
+
+S-&gt;BSAS: calculateFees(List&lt;TransactionTo&gt;); 
 BSAS-&gt;BS: calculateFees(List&lt;TransactionTo&gt;);
 BS.&gt;BSAS: Money; 
 BSAS.&gt;S:  Money;
@@ -105,6 +109,8 @@ BS-&gt;TR: addTransactions(List&lt;TransactionEntity&gt;);
 BS.&gt;BSAS: List&lt;TransactionTo&gt;; off=BS;
 BSAS.&gt;S:  List&lt;TransactionTo&gt;;off=BSAS; 
 
+S-&gt;S++: analyzeOfferBroker();
+tick=2
 
 S-&gt;BaSAS: exchange(Long, String, String, Money); on=BaSAS;
 BaSAS-&gt;BaS: exchange(Long, String, String, Money); on= BaS;
